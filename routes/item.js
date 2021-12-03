@@ -22,7 +22,7 @@ route.get(`/`, async (req, res) => {
     sql.on(`error`, (error) => res.send(error))
 
     let db = await sql.connect(config.db)
-    let query = await db.request().execute('select_items')
+    let query = await db.request().execute('select_items') 
     let data = await query.recordset
     await db.close()
     res.send(data)
