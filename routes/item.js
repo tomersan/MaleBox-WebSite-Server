@@ -74,6 +74,10 @@ route.post(`/additem`, async (req, res) => {
         .input(`Color`, sql.NVarChar(50), body.Color)
         .input(`size`, sql.NVarChar(50), body.size)
         .input(`Sell_Price`, sql.Float, body.Sell_Price)
+        .input(`Item_Image1`, sql.NVarChar(sql.MAX), body.Item_Image1)
+        .input(`Item_Image2`, sql.NVarChar(sql.MAX), body.Item_Image2)
+        .input(`Item_Image3`, sql.NVarChar(sql.MAX), body.Item_Image3)
+
 
         .output(`Item_Id`, sql.Int)
         .execute(`add_item`)
@@ -120,6 +124,10 @@ route.put(`/updateitem/:id`, async (req, res) => {
         .input(`Color`, sql.NVarChar(50), body.Color)
         .input(`size`, sql.NVarChar(50), body.size)
         .input(`Sell_Price`, sql.Float, body.Sell_Price)
+        .input(`Item_Image1`, sql.NVarChar(sql.MAX), body.Item_Image1)
+        .input(`Item_Image2`, sql.NVarChar(sql.MAX), body.Item_Image2)
+        .input(`Item_Image3`, sql.NVarChar(sql.MAX), body.Item_Image3)
+
 
         .execute(`update_item`)
     let data = await query
@@ -142,6 +150,8 @@ route.put(`/activeitem/:id`, async (req, res) => {
     res.send(data)
 
 })
+
+
 
 // route.post('/upload', upload.single('item'), function (req, res, next) {
 //     // req.file is the `avatar` file

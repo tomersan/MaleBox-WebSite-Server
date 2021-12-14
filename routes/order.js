@@ -14,6 +14,18 @@ route.get(`/`, async (req, res) => {
     res.send(data)
 
 })
+route.get(`/allorders`, async (req, res) => {
+
+    sql.on(`error`, (error) => res.send(error))
+
+    let db = await sql.connect(config.db)
+    let query = await db.request().execute('select_all_order')
+    let data = await query.recordset
+    await db.close()
+    res.send(data)
+
+})
+
 
 route.get(`/ordertoday`, async (req, res) => {
 
@@ -133,6 +145,9 @@ route.put(`/updateorder/:id`, async (req, res) => {
         .input(`Order_Note`, sql.NVarChar(sql.MAX), body.Order_Note)
         .input(`Discount`, sql.NVarChar(sql.MAX), body.Discount)
         .input(`IsActive`, sql.NVarChar(sql.MAX), body.IsActive)
+        .input(`Contact_Name`, sql.NVarChar(50), body.Contact_Name)
+        .input(`Contact_Email`, sql.NVarChar(50), body.Contact_Email)
+        .input(`Contact_Phone`, sql.NVarChar(50), body.Contact_Phone)
 
         .execute(`update_order`)
     let data = await query
